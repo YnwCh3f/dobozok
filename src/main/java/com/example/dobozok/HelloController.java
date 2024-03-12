@@ -1,5 +1,6 @@
 package com.example.dobozok;
 
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -10,12 +11,19 @@ public class HelloController {
     @FXML private Pane pnPane;
     @FXML private Label lbOpen;
     @FXML private Label lbBox;
+    @FXML private ImageView ivArrow;
 
     private Image open =new Image(getClass().getResourceAsStream("boxopen.png"));
     private Image box = new Image(getClass().getResourceAsStream("box.png"));
     private Image empty = new Image(getClass().getResourceAsStream("null.png"));
 
     private Label[][] ivArray = new Label[10][15];
+
+    private AnimationTimer atTimer = null;
+
+    private long step = 0;
+
+    private int fok = 0;
 
     public void initialize(){
         for (int i = 0; i < 10; i++){ for (int j = 0; j < 15; j++){
@@ -29,5 +37,16 @@ public class HelloController {
                 pnPane.getChildren().add(ivArray[i][j]);
             }
         }
+        atTimer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                if (now > step){
+                    ivArrow.setRotate(fok);
+                    step = now + 250000000;
+                    fok += 90;
+                }
+            }
+        };
+        atTimer.start();
     }
 }
