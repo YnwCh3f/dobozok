@@ -48,5 +48,26 @@ public class HelloController {
             }
         };
         atTimer.start();
+        feltolt();
+    }
+
+    @FXML private void onRandomClick(){
+        for (int i = 0; i < 10; i++){ for (int j = 0; j < 15; j++) {
+                ivArray[i][j].setGraphic(new ImageView(new Image(getClass().getResourceAsStream("null.png"))));
+            }
+        }
+        feltolt();
+    }
+
+    private void feltolt(){
+        for (int j = 0; j < 15; j++){
+            int i = 9;
+            int r = (int)(Math.random()*10);
+            while (r != 0){
+                ivArray[i][j].setGraphic(new ImageView(new Image(getClass().getResourceAsStream("box.png"))));
+                i--;
+                r--;
+            }
+        }
     }
 }
